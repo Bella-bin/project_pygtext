@@ -1,28 +1,25 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <GlobalHeader></GlobalHeader>
+    <!-- 路由组件出口的 -->
+    <router-view></router-view>
+    <!-- 登录，注册隐藏，home,search显示 -->
+    <GlobalFooter v-show="$route.meta.isAuth"></GlobalFooter>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import GlobalHeader  from './components/Header/GlobalHeader.vue'
+import GlobalFooter from './components/Footer/GlobalFooter.vue'
 export default {
   name: 'App',
+  // 注册组件
   components: {
-    HelloWorld
+    GlobalHeader,
+    GlobalFooter
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
