@@ -17,7 +17,11 @@ export default {
   components: {
     GlobalHeader,
     GlobalFooter
-  }
+  },
+  mounted() {
+    // 在页面挂载完成之后请求数据，只会请求一次
+    this.$store.dispatch("Home/categroylist");
+  },
 }
 </script>
 

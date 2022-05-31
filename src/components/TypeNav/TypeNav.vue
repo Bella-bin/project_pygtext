@@ -6,7 +6,11 @@
         <!-- 事件委派 goSearch -->
         <div @mouseleave="leaveShow" @mouseenter="inShow">
           <h2 class="all">全部商品分类</h2>
-          <transition  name="animate__animated animate__bounce" enter-active-class="animate__swing" leave-active-class="animate__backOutUp" >
+          <transition
+            name="animate__animated animate__bounce"
+            enter-active-class="animate__swing"
+            leave-active-class="animate__backOutUp"
+          >
             <div class="sort" v-show="isCategory" @click="goSearch">
               <div class="all-sort-list2">
                 <div
@@ -15,7 +19,7 @@
                   :key="c1.categoryId"
                   :class="{ cur: currentIndex == index }"
                 >
-                  <h3 @mouseenter="enterShow(index)" >
+                  <h3 @mouseenter="enterShow(index)">
                     <a
                       href="javascript:;"
                       :data-categoryName="c1.categoryName"
@@ -80,7 +84,7 @@
 </template>
 
 <script>
-import animate from 'animate.css'
+import animate from "animate.css";
 import { mapState } from "vuex";
 // 引入lodash 节流
 import throttle from "lodash/throttle";
@@ -94,7 +98,6 @@ export default {
   },
   // 通过vuex发送请求，存储数据
   mounted() {
-    this.$store.dispatch("Home/categroylist");
     if (this.$route.path != "/home") {
       this.isCategory = false;
     }
@@ -106,11 +109,16 @@ export default {
     enterShow: throttle(function (index) {
       this.currentIndex = index;
     }, 50),
+
+    // 全部商品显示与隐藏
     leaveShow() {
       this.currentIndex = -1;
       if (this.$route.path != "/home") {
         this.isCategory = false;
       }
+    },
+    inShow() {
+      this.isCategory = true;
     },
     // 跳转到search路由组件
     goSearch(event) {
@@ -120,7 +128,7 @@ export default {
         element.dataset; //获取自定义属性
       //  首先要判断点击的是否为a标签
       if (categoryname) {
-        let location = { path: "/search" };
+        let location = { name:'search' };
         let query = { categoryName: categoryname };
         if (categoryid) {
           query.categoryid = categoryid;
@@ -129,12 +137,14 @@ export default {
         } else if (category3id) {
           query.category3id = category3id;
         }
-        location.query = query;
-        this.$router.push(location);
+        if (this.$route.params) {
+          console.log(this.$route.params);
+          location.params = this.$route.params;
+          location.query = query;
+          console.log(location);
+          this.$router.push(location);
+        }
       }
-    },
-    inShow() {
-      this.isCategory = true;
     },
   },
 };

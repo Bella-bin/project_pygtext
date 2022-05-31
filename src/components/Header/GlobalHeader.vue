@@ -58,15 +58,11 @@ export default {
   methods: {
     // 对搜索按钮进行跳转
     goSearch(){
-     this.$router.push({
-       name:'search',
-       params:{
-         keywords:this.keywords 
-       },
-       query:{
-         k:this.keywords.toUpperCase() 
-       }
-     })
+      if(this.$route.query){
+        let location = {name:'search',params:{keywords:this.keywords || undefined}}
+        location.query = this.$route.query
+        this.$router.push(location)
+      }
     }
   },
 };

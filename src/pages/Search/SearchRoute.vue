@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "SearchRoute",
-  props:['keywords','k']
+  
 };
 </script>
 
