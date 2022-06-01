@@ -17,6 +17,8 @@ Vue.component(TypeNav.name,TypeNav)
 // 发起请求
 import {reqCategoryList} from '@/api'
 reqCategoryList()
+// 引入swiper样式
+import 'swiper/css/swiper.min.css';
 
 new Vue({
   render: h => h(App),

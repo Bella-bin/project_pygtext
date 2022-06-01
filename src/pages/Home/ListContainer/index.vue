@@ -6,8 +6,12 @@
         <!--banner轮播-->
         <div class="swiper-container" id="mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
+            <div
+              class="swiper-slide"
+              v-for="(carouse, index) in bannerList"
+              :key="carouse.id"
+            >
+              <img :src="carouse.imgUrl" />
             </div>
           </div>
           <!-- 如果需要分页器 -->
@@ -92,7 +96,43 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+// 引入swiper
+import Swiper from "swiper";
+
+export default {
+  name: "",
+  mounted() {
+    this.$store.dispatch("Home/getBannerList");
+  },
+  computed: {
+    ...mapState("Home", ["bannerList"]),
+  },
+  // 监听bannerList数据
+  watch: {
+    bannerList(newvalue, oldvalue) {
+      this.$nextTick(() => {
+        var swiper = new Swiper(".swiper-container", {
+          loop:true,
+          spaceBetween: 30,
+          centeredSlides: true,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      });
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
