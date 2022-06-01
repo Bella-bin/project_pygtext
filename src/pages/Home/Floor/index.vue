@@ -29,17 +29,7 @@
             </div>
             <div class="floorBanner">
               <!-- swiper轮播图 -->
-              <div class="swiper-container" ref="floor1Swiper">
-                <div class="swiper-wrapper">
-                  <div
-                    class="swiper-slide"
-                    v-for="(carouse, index) in list.carouselList"
-                    :key="carouse.id"
-                  >
-                    <img :src="carouse.imgUrl" />
-                  </div>
-                </div>
-              </div>
+              <Carousel :list="list.carouselList"></Carousel>
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
@@ -47,7 +37,7 @@
                 <img :src="list.recommendList[0]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[1]"  />
+                <img :src="list.recommendList[1]" />
               </div>
             </div>
             <div class="split center">
@@ -59,7 +49,7 @@
                 <img :src="list.recommendList[2]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="list.recommendList[3]"/>
+                <img :src="list.recommendList[3]" />
               </div>
             </div>
           </div>
@@ -70,29 +60,11 @@
 </template>
 
 <script>
-import Swiper from 'swiper'
+
 export default {
   name: "",
   props: ["list"],
-  mounted() {
-    var swiper = new Swiper(this.$refs.floor1Swiper, {
-      loop: true,
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  },
+  
 };
 </script>
 

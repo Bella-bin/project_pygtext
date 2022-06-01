@@ -17,6 +17,11 @@ Vue.component(TypeNav.name,TypeNav)
 // 发起请求
 import {reqCategoryList} from '@/api'
 reqCategoryList()
+
+// 轮播图全局组件
+import Carousel from '@/components/Carousel'
+Vue.component(Carousel.name,Carousel)
+
 // 引入swiper样式
 import 'swiper/css/swiper.min.css';
 
