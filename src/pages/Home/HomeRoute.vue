@@ -5,8 +5,7 @@
     <Recommend></Recommend>
     <Rank></Rank>
     <Link></Link>
-    <Floor></Floor>
-    <Floor></Floor>
+    <Floor v-for="(floor,index) in floorList" :key="floor.id" :list="floor"></Floor>
     <Brand></Brand>
   </div>
 </template>
@@ -18,6 +17,7 @@ import Rank from '@/pages/Home/Rank'
 import Link from '@/pages/Home/Link'
 import Floor from '@/pages/Home/Floor'
 import Brand from '@/pages/Home/Brand'
+import {mapState} from 'vuex'
 export default {
   name: "HomeRoute",
   components:{
@@ -27,6 +27,12 @@ export default {
     Link,
     Floor, 
     Brand 
+  },
+  mounted() {
+   this.$store.dispatch('Home/getFloorList');
+  },
+  computed:{
+    ...mapState('Home',['floorList'])
   }
 };
 </script>

@@ -1,9 +1,10 @@
-import { reqCategoryList, reqGetBanner } from '@/api'
+import { reqCategoryList, reqGetBanner ,reqFoolList} from '@/api'
 export default {
     namespaced: true,
     state: {
         categroylist: [],
         bannerList:[],
+        floorList:[],
     },
     actions: {
         // 请求 三级联动导航接口
@@ -20,6 +21,13 @@ export default {
             if(result.code == 200){
                 context.commit('GETBANNERLIST',result.data)
             }
+        },
+        // 请求
+        async getFloorList(context){
+            const result = await reqFoolList()
+            if(result.code == 200) {
+                context.commit('GETFLOORLIST',result.data)
+            }
         }
     },
     mutations: {
@@ -28,6 +36,9 @@ export default {
         },
         GETBANNERLIST(state,bannerList){
             state.bannerList = bannerList
+        },
+        GETFLOORLIST(state,floorList) {
+            state.floorList = floorList
         }
     },
     getters: {}

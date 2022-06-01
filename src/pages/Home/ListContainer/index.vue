@@ -4,7 +4,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+        <div class="swiper-container" ref="mySwiper">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
@@ -112,7 +112,7 @@ export default {
   watch: {
     bannerList(newvalue, oldvalue) {
       this.$nextTick(() => {
-        var swiper = new Swiper(".swiper-container", {
+        var swiper = new Swiper(this.$refs.mySwiper, {
           loop:true,
           spaceBetween: 30,
           centeredSlides: true,
